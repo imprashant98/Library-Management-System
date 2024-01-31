@@ -20,9 +20,9 @@ Developers can interact with the API using tools like Postman or cURL, allowing 
 
 - Create a virtual environment and install the dependencies:
 
-`python -m venv env`
+`python -m venv venv`
 
-`source env/bin/activate` # On Windows use `env\Scripts\activate`
+`source venv/bin/activate` # On Windows use `venv\Scripts\activate`
 
 `pip install -r requirements.txt`
 
@@ -36,14 +36,110 @@ In addition to the API, the project includes functionality to manage books. The 
 
 # How to Interact with the API
 
-- **Add a Book:** Use the `/books/add/` endpoint with a POST request, providing the required details.
-- **Get Book by ID:** Access the `/books/{book_id}` endpoint with a GET request to retrieve details for a specific book.
-- **Update Book:** Utilize the `/books/{book_id}` endpoint with a PUT request to update information for a specific book.
-- **Delete Book:** Make a DELETE request to `/books/{book_id}` to remove a book from the database.
-- **Add User:** Use the `/users/add/` endpoint to add a new user.
-- **Get User by ID:** Access the `/users/{user_id}` endpoint to retrieve details for a specific user.
-- **Borrow Book:** Send a POST request to `/borrow` to borrow a book.
-- **Return Book:** Use the `/return` endpoint with a POST request to return a borrowed book.
-- **List Borrowed Books:** Access the `/borrowed-books` endpoint with a GET request to retrieve a list of all borrowed books.
+1. **JWT Configuration:**
+
+   - JWT (JSON Web Tokens) are used for authentication.
+   - Configuration includes a secret key (`JWT_SECRET`) and an algorithm (`JWT_ALGORITHM`).
+
+2. **Token Validation:**
+
+   - A `decode_token` function validates and decodes JWT tokens.
+   - It is used as a dependency for protected endpoints.
+
+3. **Book Management:**
+
+   - **Add a Book:**
+
+     - Endpoint: `POST /books/add/`
+     - Creates a new book in the system.
+
+   - **Get Book by ID:**
+
+     - Endpoint: `GET /books/{book_id}`
+     - Retrieves details for a specific book based on its ID.
+
+   - **Update Book:**
+
+     - Endpoint: `PUT /books/{book_id}`
+     - Updates information for a specific book based on its ID.
+
+   - **Delete Book:**
+     - Endpoint: `DELETE /books/{book_id}`
+     - Removes a book from the database based on its ID.
+
+4. **User Management:**
+
+   - **User Login:**
+
+     - Endpoint: `POST /users/login`
+     - Authenticates a user using email and password, returning a JWT token upon success.
+
+   - **Add User:**
+
+     - Endpoint: `POST /users/add/`
+     - Adds a new user to the system.
+
+   - **Get User by ID:**
+
+     - Endpoint: `GET /users/{user_id}`
+     - Retrieves details for a specific user based on their ID.
+
+   - **Update User:**
+
+     - Endpoint: `PUT /users/{user_id}`
+     - Updates information for a specific user based on their ID.
+
+   - **Delete User:**
+     - Endpoint: `DELETE /users/{user_id}`
+     - Removes a user from the system based on their ID.
+
+5. **Borrowed Books:**
+
+   - **Borrow Book:**
+
+     - Endpoint: `POST /borrow`
+     - Allows users to borrow a book.
+
+   - **Return Book:**
+
+     - Endpoint: `POST /return`
+     - Enables users to return a borrowed book.
+
+   - **List Borrowed Books:**
+     - Endpoint: `GET /borrowed-books`
+     - Retrieves a list of all borrowed books.
+
+6. **Book Details:**
+
+   - **Add Book Details:**
+
+     - Endpoint: `POST /books/{book_id}/details`
+     - Creates details for a specific book based on its ID.
+
+   - **Update Book Details:**
+
+     - Endpoint: `PUT /books/{book_id}/details`
+     - Updates details for a specific book based on its ID.
+
+   - **Get Book Details:**
+
+     - Endpoint: `GET /books/{book_id}/details`
+     - Retrieves details for a specific book based on its ID.
+
+   - **Delete Book Details:**
+     - Endpoint: `DELETE /books/{book_id}/details`
+     - Removes details for a specific book based on its ID.
+
+7. **Usage:**
+   - Make requests using tools like Postman or curl.
+   - Include the JWT token in the Authorization header for protected endpoints.
+
+# Login
+
+Use the `/users/login` endpoint with a POST request to authenticate a user and obtain a JWT token.
+
+# Authentication
+
+This API also uses JSON Web Tokens (JWT) for authentication. JWT is a compact, URL-safe means of representing claims to be transferred between two parties.
 
 Feel free to experiment with the API using tools like Postman or curl.
