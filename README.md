@@ -14,7 +14,7 @@ Developers can interact with the API using tools like Postman or cURL, allowing 
 
 - To get started, clone this repository to your local machine:
 
-`git clone git@github.com:imprashant98/LibraryMS.git`
+`https://github.com/imprashant98/Library-Management-System.git`
 
 `cd library-management-system`
 
