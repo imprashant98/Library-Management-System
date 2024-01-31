@@ -1,4 +1,4 @@
-# Library Management System API
+# FASTAPI Library Management System API
 
 This FastAPI application is a comprehensive system for managing a book library, utilizing a PostgreSQL database and SQLAlchemy for seamless interactions. It includes functionality for adding, updating, and deleting books, as well as retrieving detailed information about each book.
 
