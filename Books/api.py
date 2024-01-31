@@ -11,7 +11,7 @@ from pydantic import BaseModel
 from fastapi import FastAPI, Body
 from Books.auth.auth_bearer import JWTBearer
 from Books.auth.auth_handler import signJWT
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer, HTTPBearer
 from jose import JWTError, jwt
 from decouple import config
 
@@ -43,6 +43,7 @@ def get_db():
 
 # Define the OAuth2PasswordBearer for token validation
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+auth = HTTPBearer()
 
 # JWT Configuration
 JWT_SECRET = config("secret")
@@ -51,7 +52,7 @@ JWT_ALGORITHM = config("algorithm")
 # Function to decode JWT token
 
 
-def decode_token(token: str = Depends(oauth2_scheme)):
+def decode_token(token: str = Depends(auth)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
