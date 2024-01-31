@@ -3,6 +3,7 @@ from Books.schema import BookDetailsBase, BookDetailsCreate, BookDetailsUpdate, 
 from Books.models import Book, BookDetails, User, BorrowedBook
 import logging
 from passlib.hash import bcrypt
+from passlib.context import CryptContext
 from sqlalchemy.exc import IntegrityError
 
 
@@ -188,6 +189,18 @@ def get_user_by_id(user_id, db: Session):
     if user:
         db.refresh(user)
     return user
+
+
+def get_user_by_email(email: str, db: Session):
+    return db.query(User).filter(User.Email == email).first()
+
+
+# Create an instance of CryptContext for password hashing
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+def verify_user_password(plain_password, hashed_password):
+    return pwd_context.verify(plain_password, hashed_password)
 
 
 def update_user(user_id: int, user_details: UserUpdate, db: Session):

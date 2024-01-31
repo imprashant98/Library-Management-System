@@ -35,7 +35,13 @@ class BookUpdate(BookBase):
 class UserBase(BaseModel):
     Name: str
     Email: str
+    Password: str
     MembershipDate: date
+
+
+class UserLogin(BaseModel):
+    Email: str
+    Password: str
 
 
 class UserCreate(UserBase):
