@@ -48,6 +48,7 @@ class User(Base):
     UserID = Column(Integer, primary_key=True)
     Name = Column(String, nullable=False)
     Email = Column(String, unique=True, nullable=False)
+    Password = Column(String, nullable=False)
     MembershipDate = Column(Date)
 
 

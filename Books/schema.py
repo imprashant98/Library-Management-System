@@ -1,41 +1,80 @@
+from typing import Optional
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import date
 
 
 class BookDetailsBase(BaseModel):
-    NumberOfPages: int
-    Publisher: str
-    Language: str
+    NumberOfPages: Optional[int]
+    Publisher: Optional[str]
+    Language: Optional[str]
 
 
-class BookCreate(BaseModel):
+class BookDetailsCreate(BookDetailsBase):
+    pass
+
+
+class BookDetailsUpdate(BookDetailsBase):
+    pass
+
+
+class BookBase(BaseModel):
     title: str
     isbn: str
-    published_date: datetime
-    genre: str
-    details: BookDetailsBase
-
-
-class BookUpdate(BaseModel):
-    title: str
-    isbn: str
-    published_date: datetime
+    published_date: date
     genre: str
 
 
-class UserCreate(BaseModel):
-    name: str
-    email: str
-    membership_date: datetime
+class BookCreate(BookBase):
+    details: Optional[BookDetailsCreate]
+
+
+class BookUpdate(BookBase):
+    details: Optional[BookDetailsUpdate]
+
+
+class UserBase(BaseModel):
+    Name: str
+    Email: str
+    MembershipDate: date
+
+
+class UserCreate(UserBase):
+    Password: str
+
+
+class UserUpdate(UserBase):
+    pass
 
 
 class BorrowBook(BaseModel):
-    user_id: str
-    book_id: str
-    borrow_date: datetime
+    user_id: int
+    book_id: int
+    borrow_date: date
 
 
 class ReturnBook(BaseModel):
-    user_id: str
-    book_id: str
-    return_date: datetime
+    user_id: int
+    book_id: int
+    return_date: date
+
+
+class BorrowedBookBase(BaseModel):
+    UserID: int
+    BookID: int
+    BorrowDate: date
+    ReturnDate: Optional[date]
+
+
+class BorrowedBookCreate(BorrowedBookBase):
+    pass
+
+
+class BorrowedBookUpdate(BorrowedBookBase):
+    pass
+
+
+class BorrowedBookResponse(BorrowedBookBase):
+    id: int
+
+    class Config:
+        orm_mode = True
